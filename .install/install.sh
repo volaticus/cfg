@@ -20,6 +20,7 @@ pacmanPkgs=(
 	"git-delta"
 
 	"neovim"
+
 	"neofetch"
 )
 sudo pacman -S --noconfirm --needed "${pacmanPkgs[@]}"
@@ -62,5 +63,4 @@ else
 	echo "skip installing dotbare because $dotbarePath folder already exists"
 fi
 
-
-
+timedatectl set-local-rtc 1 --adjust-system-clock
