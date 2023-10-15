@@ -18,6 +18,8 @@ pacmanPkgs=(
 	"tree"
 	"bat"
 	"git-delta"
+
+	"neovim"
 	"neofetch"
 )
 sudo pacman -S --noconfirm --needed "${pacmanPkgs[@]}"
@@ -27,9 +29,10 @@ if sudo pacman -Qs yay > /dev/null; then
 else 
 	echo "installing yay..."
 	git clone https://aur.archlinux.org/yay-git.git ~/.install/yay-git
-	cd ~/.install/yay-git
+	cd $HOME/.install/yay-git
 	makepkg -si --noconfirm
 	cd -
+	rm -rf $HOME/.install/yay-git
 fi
 
 yayPkgs=(
