@@ -7,12 +7,17 @@ echo "start installing..."
 mkdir -p ~/.install
 
 pacmanPkgs=(
+	"man"
 	"git"
         "github-cli"
 	"zsh"
 	"alacritty"
 	"hyprland"
 
+	"fzf"
+	"tree"
+	"bat"
+	"git-delta"
 	"neofetch"
 )
 sudo pacman -S --noconfirm --needed "${pacmanPkgs[@]}"
@@ -33,22 +38,25 @@ yayPkgs=(
 )
 yay -S --noconfirm --needed --answerdiff None --answerclean None "${yayPkgs[@]}"
 
-git config --global init.defaultBranch main
-git config --global user.email ""
-git config --global user.name "volaticus"
-git config --global credential.credentialStore cache
-git config --global credential.cacheOptions "--timeout 7200"  
 
 if [[ $SHELL != "/usr/bin/zsh" ]]; then
 	chsh -s $(which zsh)
 else
-	echo "shell not changed, already set to ZSH"
+	echo "skip setting default shell, because already set to ZSH"
 fi
 
-if [ ! -d ~/.oh-my-zsh ]; then
+ohmyzshPath=$HOME/.oh-my-zsh
+if [ ! -d $ohmyzshPath ]; then
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 else
-	echo "skip installing ohmyzsh because ~/.oh-my-zsh folder already exists"
+	echo "skip installing ohmyzsh because $ohmyzshPath folder already exists"
+fi
+
+dotbarePath=$ohmyzshPath/custom/plugins/dotbare
+if [ ! -d $dotbarePath ]; then
+	git clone https://github.com/kazhala/dotbare.git $dotbarePath
+else
+	echo "skip installing dotbare because $dotbarePath folder already exists"
 fi
 
 
