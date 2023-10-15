@@ -4,16 +4,29 @@
 set -euo pipefail
 
 echo "start installing..."
+echo "enter your name:" 
+read myName
+echo "enter your email:" 
+read myEmail
+
 mkdir -p ~/.install
 
 pacmanPkgs=(
-	"neofetch"
 	"git"
         "github-cli"
-)
-sudo pacman -S --noconfirm --needed $pacmanPkgs
-git config --global init.defaultBranch main
+	"zsh"
+	"alacritty"
+	"hyprland"
 
+	"neofetch"
+)
+sudo pacman -S --noconfirm --needed "${pacmanPkgs[@]}"
+git config --global init.defaultBranch main
+git config --global user.email "$myEmail"
+git config --global user.name "$myName"
+  
+chsh -s $(which zsh)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 if sudo pacman -Qs yay > /dev/null; then
 	echo "yay is installed. skipping..."
@@ -28,6 +41,6 @@ fi
 yayPkgs=(
 	"google-chrome"
 )
-yay -S --noconfirm --needed --answerdiff None --answerclean None $yayPkgs
+yay -S --noconfirm --needed --answerdiff None --answerclean None "${yayPkgs[@]}"
 
 
