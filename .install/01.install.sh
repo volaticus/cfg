@@ -12,6 +12,7 @@ pacmanPkgs=(
         "github-cli"
 	"zsh"
 	"alacritty"
+	"rofi"
 	"hyprland"
 
 	"fzf"
@@ -63,4 +64,9 @@ else
 	echo "skip installing dotbare because $dotbarePath folder already exists"
 fi
 
-timedatectl set-local-rtc 1 --adjust-system-clock
+isRTCInLocal=$(timedatectl status | awk -F'[:]+' '/RTC in local TZ/ {print $2}' | xargs)
+if [ $isRTCInLocal != "yes" ]; then
+	timedatectl set-local-rtc 1 --adjust-system-clock
+else
+	echo "skip setting local RTC because already set"
+fi
