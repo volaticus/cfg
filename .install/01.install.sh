@@ -20,6 +20,11 @@ pacmanPkgs=(
 	"bat"
 	"git-delta"
 
+	"noto-fonts"
+	"ttf-fira-code"
+	"ttf-jetbrains-mono"
+	"ttf-cascadia-code"
+
 	"neovim"
 
 	"neofetch"
@@ -40,6 +45,7 @@ fi
 yayPkgs=(
 	"google-chrome"
 	"git-credential-manager-core"
+	"ttf-meslo-nerd-font-powerlevel10k"
 )
 yay -S --noconfirm --needed --answerdiff None --answerclean None "${yayPkgs[@]}"
 
@@ -70,3 +76,19 @@ if [ $isRTCInLocal != "yes" ]; then
 else
 	echo "skip setting local RTC because already set"
 fi
+
+
+alacrittyThemePath=$HOME/.config/alacritty/catppuccin
+if [ ! -d $alacrittyThemePath ]; then
+	git clone https://github.com/catppuccin/alacritty.git $alacrittyThemePath
+else
+	echo "skip installing alacritty theme because $alacrittyThemePath folder already exists"
+fi
+
+powerline10kPath=$ohmyzshPath/custom/themes/powerlevel10k
+if [ ! -d $powerline10kPath ]; then
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $powerline10kPath
+else
+	echo "skip installing dotbare because $powerline10kPath folder already exists"
+fi
+
