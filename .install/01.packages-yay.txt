@@ -1,0 +1,12 @@
+cava-git
+ponymix
+swaylock-effects
+catppuccin-gtk-theme-mocha
+numix-cursor-theme-git
+papirus-icon-theme-git
+bibata-cursor-theme
+google-chrome
+git-credential-manager-core
+ttf-meslo-nerd-font-powerlevel10k
+rofi-lbonn-wayland
+

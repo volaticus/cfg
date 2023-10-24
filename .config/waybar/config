@@ -1,0 +1,99 @@
+{
+    "layer": "top",
+    "position": "top",
+
+    "modules-left":["hyprland/workspaces", "tray"],
+    "modules-center": ["custom/music", "cava"],
+    "modules-right": [
+      "network",
+      "cpu",
+      "memory",
+      "temperature",
+      "custom/updates",
+      "hyprland/language",
+      "pulseaudio",
+      "clock",
+      "custom/lock",
+      "custom/power"
+   ],
+   "tray": {
+      "spacing": 10
+   },
+   "hyprland/workspaces" : {
+        "on-click": "activate",
+        "active-only": false,
+        "all-outputs": true,
+        "format": "{icon}",
+        "format-icons": {
+			    "default": ""
+        }
+    },
+    "hyprland/language": {
+       "format": "{}",
+       "format-en": "US",
+       "format-uk": "UA",
+       "keyboard-name": "keebio-iris-rev.-8"
+    },
+    "custom/music": {
+        "format": "  {}",
+        "escape": true,
+        "interval": 5,
+        "tooltip": false,
+        "exec": "playerctl metadata --format='{{ title }}'",
+        "on-click": "playerctl play-pause",
+        "max-length": 50
+    },
+    
+    "clock": {
+        "timezone": "Europe/Kiev",
+        "tooltip-format": "<big>{:%d %B %Y}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": " {:%d/%m/%Y}",
+        "format": " {:%H:%M}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "default": ["", "", " "]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/lock": {
+        "tooltip": false,
+        "on-click": "sh -c '(sleep 0.5s; swaylock --grace 0)' & disown",
+        "format": "",
+    },
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "rofi -show power-menu -modi power-menu:$HOME/.local/bin/rofi-power-menu.sh & disown",
+        "format": "襤"
+    },
+    "network": {
+      "interface": "eno1",
+      "tooltip-format-ethernet": "{ifname} ",
+      "interval": 2,
+      "format": " {bandwidthDownBits}  {bandwidthUpBits}",
+    },
+    "temperature": {
+      "format": "{icon} {temperatureC}°C",
+      "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+      "critical-threshold": 80,
+      "format-icons": ["", "", ""]
+    },
+    "memory": {
+      "format": " {}%",
+      "tooltip": "false"
+    },
+    "cpu": {
+      "format": " {usage}%",
+      "tooltip": "false"
+    },
+    "custom/updates": {
+      "format": " {}",
+      "tooltip": false,
+      "interval": 3600,
+      "exec": "exec $HOME/.config/waybar/checkupdate.sh"
+    },
+}
+

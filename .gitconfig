@@ -10,8 +10,9 @@
 	email = 
 	name = volaticus
 [credential]
-	credentialStore = cache
+	credentialStore = plaintext
 	cacheOptions = --timeout 7200
+	helper = store
 
 [core]
     pager = delta
@@ -28,3 +29,5 @@
 
 [diff]
     colorMoved = default
+[safe]
+	directory = /opt/flutter
